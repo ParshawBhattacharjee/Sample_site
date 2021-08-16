@@ -13,9 +13,13 @@ def index(request):
     return render(request, 'index.html')
 
 def about(request):
+    if request.user.is_anonymous:
+        return redirect("/signin") 
     return render(request, 'about.html')
 
 def contact(request):
+    if request.user.is_anonymous:
+        return redirect("/signin") 
     if request.method == "POST":
         name = request.POST.get('name')
         email = request.POST.get('email')
